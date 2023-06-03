@@ -49,7 +49,9 @@ app.post('/register', async(req, res) =>{
 app.post('/login', async (req, res) =>{
     try{
          const {email,password} = req.body;
+        //  console.log('Test',req);
          let exist = await Registeruser.findOne({email:email});
+        //  console.log(exist);
 
          if(!exist){
             return res.status(404).send("User Not Found");
@@ -65,7 +67,7 @@ app.post('/login', async (req, res) =>{
             }
          }
 
-         jwt.sign(payload,'jwtSecret',{expiresIn: 300},(err, token) =>{
+         jwt.sign(payload,'jwtSecret',{expiresIn: 3000},(err, token) =>{
              if(err){
                 throw err;
              }
@@ -132,6 +134,7 @@ app.patch('/update/:id', async(req, res) =>{
     try{
          const id = req.params.id;
          const updateData = req.body;
+         console.log(updateData);
 
          const contactUpdate = await Contactcreate.findByIdAndUpdate(
             id, updateData

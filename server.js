@@ -67,7 +67,7 @@ app.post('/login', async (req, res) =>{
             }
          }
 
-         jwt.sign(payload,'jwtSecret',{expiresIn: 3000},(err, token) =>{
+         jwt.sign(payload,'jwtSecret',{expiresIn: 10000},(err, token) =>{
              if(err){
                 throw err;
              }

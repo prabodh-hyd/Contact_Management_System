@@ -17,13 +17,15 @@ import { Box, Button } from "@mui/material";
 import Create from "./Create";
 import Edit from "./Edit";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { getAllContactData } from '../state/selectors';
-// import { userDeleteState } from '../state/atoms';
+import { getAllContactData, userDeleteState } from "../state/atoms";
+
 
 
 const Dashboard = () => {
   const [token, setToken] = useContext(store);
   const [allData, setAllData] = useRecoilState(getAllContactData);
+  const [userIdDelete, setUserIdDelete] = useRecoilState(userDeleteState);
+
   // const deleteIdData = useRecoilValue(userDeleteId);
   // const [deleteId, setDeleteId] = useRecoilState(userDeleteState);
   const [data, setData] = useState(null);
@@ -61,10 +63,10 @@ const Dashboard = () => {
   }));
 
   const handleDeleteContact = (id) =>{
-    // setDeleteId(id);
+    setUserIdDelete(id)
+    // axios.delete(`http://localhost:8000/delete/${id}`)
+    // .then(res => setUserIdDelete(res.data));
 
-    axios.delete(`http://localhost:8000/delete/${id}`)
-    .then(res => console.log(res.data))
   }
   // console.log(deleteId);
 

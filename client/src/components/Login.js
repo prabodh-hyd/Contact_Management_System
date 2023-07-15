@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import contactImage from '../assets/contact_management.jpg'
 import Dashboard from "./Dashboard";
 import ContactNavbar from "./Navbar";
-import {Avatar,Box, Button,CssBaseline, Container,Grid,Typography, TextField } from "@mui/material";
+import { Avatar, Box, Button, CssBaseline, Container, Grid, Typography, TextField } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { authAtom } from "../state/atoms";
 import { useRecoilState } from 'recoil';
@@ -25,10 +25,22 @@ const Login = (props) => {
 
     const submitForm = e => {
         e.preventDefault();
-        console.log(data);
+        // console.log(data);
         axios.post('http://localhost:8000/login', data).then(
-            res => setToken(res.data.token)
+            res => {
+                const token = res.data.token;
+                //set JWT token to localStorage
+                localStorage.setItem("auth_key", token);
+                setToken(token);
+            }
         )
+    }
+
+    //check JWT token from localStorage
+    const getToken = localStorage.getItem("auth_key");
+    console.log(getToken);
+    if (getToken) {
+        setToken(getToken);
     }
 
     console.log(token);

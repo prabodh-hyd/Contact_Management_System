@@ -10,7 +10,9 @@ const ContactNavbar2 = (pros) => {
   const [token, setToken] = useContext(store);
 
   const handleLogout = () =>{
-    setToken(null)
+    // setToken(null)
+    const removeAuthKey = localStorage.removeItem('auth_key');
+    setToken(removeAuthKey);
   }
 
   return (

@@ -23,24 +23,36 @@ export const getAllContactData = atom({
     })
 })
 
-export const userDeleteState = atom({
-    key: 'userDeleteState/userDeleteId',
+
+
+export const deleteResponseState = atom({
+    key: 'deleteResponseState',
     default: null,
-    default:selector({
-        key: '',
-        get: async (userDeleteState) =>{
-            console.log("desu");
-            try{
-                const response = await  axios.get(`http://localhost:8000/delete/${userDeleteState}`)
-                const json = await response.data;
-                return json;
-            }
-            catch(err){
-               console.log(err);
-            }
-        }
-    })
-})
+});
+
+export const isLoadingState = atom({
+    key: 'isLoadingState',
+    default: false,
+  });
+
+// export const userDeleteState = atom({
+//     key: 'userDeleteState',
+//     default: 0,
+//     // default:selector({
+//     //     key: 'userDeleteState/DeleteId',
+//     //     get: async (userDeleteState) =>{
+//     //         console.log("desu");
+//     //         try{
+//     //             const response = await  axios.get(`http://localhost:8000/delete/${userDeleteState}`)
+//     //             const json = await response.data;
+//     //             return json;
+//     //         }
+//     //         catch(err){
+//     //            console.log(err);
+//     //         }
+//     //     }
+//     // })
+// })
 
 
 // export const industriesState = atom<Industry[]>({

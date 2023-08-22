@@ -1,6 +1,6 @@
 import axios from "axios";
 import { selector } from "recoil";
-import { userDeleteState, getAllContactData } from './atoms';
+// import { userDeleteState, getAllContactData } from './atoms';
 
 // export const getAllContactData = selector({
 //     key:'getAllContactData',
@@ -20,11 +20,21 @@ export const userDeleteId = selector({
     key:'userDeleteId',
     get: async ({get}) =>{
         const getDeleteId = get(userDeleteState);
-        const getAllData = get(getAllContactData)
-        console.log(getDeleteId);
-       const deleteResponse = await axios.delete(`http://localhost:8000/delete/${getDeleteId}`)
-        console.log(getAllContactData)
-       const json = await deleteResponse.data;
-       return json;
+        console.log(getDeleteId)
     }
 })
+
+// default:selector({
+//     key: 'userDeleteState/DeleteId',
+//     get: async (userDeleteState) =>{
+//         console.log("desu");
+//         try{
+//             const response = await  axios.get(`http://localhost:8000/delete/${userDeleteState}`)
+//             const json = await response.data;
+//             return json;
+//         }
+//         catch(err){
+//            console.log(err);
+//         }
+//     }
+// })

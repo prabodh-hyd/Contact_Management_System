@@ -51,30 +51,30 @@ function Edit(props) {
                     Edit the contact form
                 </DialogTitle>
                 <DialogContent>
-                    <Box component="form" noValidate onSubmit={onSubmitForm} sx={{ mt: 3 }}>
+                    <Box component="form" onSubmit={onSubmitForm} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
                                 <TextField
-                                    onChange={onChangeHandler}
-                                    autoComplete="given-name"
+                                    onChange={(e) => {onChangeHandler(e)}}
+                                    // autoComplete="given-name"
                                     name='firstname'
                                     value={props.data.firstname}                                   
                                     fullWidth
                                     id="firstname"
                                     label="First Name"
-                                    autoFocus
+                                    // autoFocus
                                 />
                             </Grid>
                             <Grid item xs={12} >
                                 <TextField
                                     onChange={onChangeHandler}
-                                    autoComplete="given-name"
+                                    // autoComplete="given-name"
                                     name='lastname'
                                     value={props.data.lastname}
                                     fullWidth
                                     id="lastname"
                                     label="Last Name"
-                                    autoFocus
+                                    // autoFocus
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -85,7 +85,7 @@ function Edit(props) {
                                     id="email"
                                     label="Email"
                                     name="email"
-                                    autoComplete="email"
+                                    // autoComplete="email"
                                 />
                             </Grid>
                             <Grid item xs={12}>

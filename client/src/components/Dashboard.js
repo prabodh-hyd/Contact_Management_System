@@ -16,15 +16,18 @@ import ContactNavbar2 from "./ContactNavbar2";
 import { Box, Button } from "@mui/material";
 import Create from "./Create";
 import Edit from "./Edit";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { getAllContactData, userDeleteState } from "../state/atoms";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { getAllContactData,isLoadingState,deleteResponseState } from "../state/atoms";
+import { deleteData } from "../utils/serverAPIs";
 
 
 
 const Dashboard = () => {
   const [token, setToken] = useContext(store);
   const [allData, setAllData] = useRecoilState(getAllContactData);
-  const [userIdDelete, setUserIdDelete] = useRecoilState(userDeleteState);
+  // const [userIdDelete, setUserIdDelete] = useRecoilState(userDeleteState);
+  const [isLoading, setLoading] = useRecoilState(isLoadingState);
+  const setDeleteResponse = useSetRecoilState(deleteResponseState);
 
   // const deleteIdData = useRecoilValue(userDeleteId);
   // const [deleteId, setDeleteId] = useRecoilState(userDeleteState);
@@ -63,11 +66,27 @@ const Dashboard = () => {
   }));
 
   const handleDeleteContact = (id) =>{
-    setUserIdDelete(id)
+    // setUserIdDelete(id)
+
+    handleDelete(id)
+
     // axios.delete(`http://localhost:8000/delete/${id}`)
     // .then(res => setUserIdDelete(res.data));
 
   }
+
+  
+  const handleDelete = async (id) => {
+    setLoading(true);
+    try {
+      await deleteData(id);
+      setDeleteResponse('Data deleted successfully.');
+    } catch (error) {
+      setDeleteResponse('Failed to delete data.');
+    } finally {
+      setLoading(false);
+    }
+  };
   // console.log(deleteId);
 
   // const handleEditContact = (id) =>{
@@ -75,10 +94,12 @@ const Dashboard = () => {
   // }
   return (
     <>
+     {/* {isLoading ? <p>Loading...</p> : null} */}
       {
         data &&
         <ContactNavbar2 name={data.name}  />
       }
+      {isLoading ? <p>Loading...</p> : null}
       <Box sx={{
         boxShadow: 1,
         width: '85%',

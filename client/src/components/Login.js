@@ -30,14 +30,15 @@ const Login = (props) => {
             res => {
                 const token = res.data.token;
                 //set JWT token to localStorage
-                localStorage.setItem("auth_key", token);
+                // localStorage.setItem("auth_key", token);
+                sessionStorage.setItem("auth_key", token);
                 setToken(token);
             }
         )
     }
 
     //check JWT token from localStorage
-    const getToken = localStorage.getItem("auth_key");
+    const getToken = sessionStorage.getItem("auth_key");
     console.log(getToken);
     if (getToken) {
         setToken(getToken);
